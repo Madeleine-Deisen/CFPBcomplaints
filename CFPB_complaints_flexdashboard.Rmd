@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Consumer Finance Protection Bureau Complaints"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -62,16 +62,29 @@ top_companies <- complaints %>%
 fig <- plot_ly(
   x = top_companies$company,
   y = top_companies$total,
-  name = "Top 10 Companies with Most Complaints",
+  name = "Top 5 Companies with Most Complaints",
   type = "bar"
 )
 fig
 
 ```
 
-### Chart C
+### Top Products
 
 ```{r}
+top_products <- complaints %>%
+  group_by(product) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total)) %>%
+  top_n(5)
+
+fig <- plot_ly(
+  x = top_products$product,
+  y = top_products$total,
+  name = "Top 5 Products with Most Complaints",
+  type = "bar"
+)
+fig
 
 ```
 
