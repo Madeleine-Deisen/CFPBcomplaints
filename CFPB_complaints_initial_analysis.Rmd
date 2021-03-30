@@ -38,3 +38,10 @@ complaints %>%
   summarise(total = n()) %>%
   arrange(desc(total))
 ```
+##Top states
+
+```{r}
+complaints %>%
+  count(state) %>%
+  arrange(desc(n))
+```
