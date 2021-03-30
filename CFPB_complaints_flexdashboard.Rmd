@@ -29,6 +29,25 @@ library(tmaptools)
 Column {data-width=650}
 -----------------------------------------------------------------------
 
+### Top Issues
+
+```{r}
+complaints <- readRDS("C:/Users/madel/OneDrive/Reporting in the Digital Age/github_repositories/CFPBcomplaints/complaints.rds")
+
+top_issues <- complaints %>%
+  group_by(issue) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total)) %>%
+  top_n(5)
+
+fig <- plot_ly(labels = top_issues$issue, values = top_issues$total) %>%
+  add_pie(hole = 0.6)
+fig
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
 ### Top Companies
 
 ```{r}
@@ -38,7 +57,7 @@ top_companies <- complaints %>%
   group_by(company) %>%
   summarise(total = n()) %>%
   arrange(desc(total)) %>%
-  top_n(10)
+  top_n(5)
 
 fig <- plot_ly(
   x = top_companies$company,
@@ -46,16 +65,7 @@ fig <- plot_ly(
   name = "Top 10 Companies with Most Complaints",
   type = "bar"
 )
-
 fig
-```
-
-Column {data-width=350}
------------------------------------------------------------------------
-
-### Chart B
-
-```{r}
 
 ```
 
