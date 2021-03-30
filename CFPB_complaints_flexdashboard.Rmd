@@ -1,0 +1,67 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(glue)
+library(plotly)
+library(DT)
+library(htmlwidgets)
+library(htmltools)
+library(readxl)
+library(leaflet)
+library(RColorBrewer)
+library(htmlwidgets)
+library(htmltools)
+library(tigris)
+library(tmap)
+library(tmaptools)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Top Companies
+
+```{r}
+complaints <- readRDS("C:/Users/madel/OneDrive/Reporting in the Digital Age/github_repositories/CFPBcomplaints/complaints.rds")
+
+top_companies <- complaints %>%
+  group_by(company) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total)) %>%
+  top_n(10)
+
+fig <- plot_ly(
+  x = top_companies$company,
+  y = top_companies$total,
+  name = "Top 10 Companies with Most Complaints",
+  type = "bar"
+)
+
+fig
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
