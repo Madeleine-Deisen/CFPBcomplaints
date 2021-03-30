@@ -30,3 +30,11 @@ complaints %>%
   arrange(desc(total))
 
 ```
+## Top issues
+
+```{r}
+complaints %>%
+  group_by(issue) %>%
+  summarise(total = n()) %>%
+  arrange(desc(total))
+```
